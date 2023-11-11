@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from scipy.interpolate import LinearNDInterpolator
 
 class PriceAggregation:
 

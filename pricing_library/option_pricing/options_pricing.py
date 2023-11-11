@@ -85,8 +85,8 @@ class CallVanillaOption(VanillaOption):
         St=geometric_brownian(r,sigma,S0,t)
         d1=(1/(sigma*np.sqrt(T-t)))*np.log((St*np.exp((r-q)*(T-t)))/K)+(1/2)*sigma*np.sqrt(T-t)
         d0=d1-(sigma*np.sqrt(T-t))
-        delta=norm.cdf(d1)
-        gamma=norm.pdf(d1)/((St*np.exp(-q*(T-t)))*sigma*np.sqrt(T-t))
+        delta=np.exp(-q*(T-t))*norm.cdf(d1)
+        gamma=(np.exp(-q*(T-t))*norm.pdf(d1))/((St*np.exp(-q*(T-t)))*sigma*np.sqrt(T-t))
         vega=(St*np.exp(-q*(T-t)))*np.sqrt(T-t)*norm.pdf(d1)
         theta=(St*np.exp(-q*(T-t)))*norm.pdf(d1)*sigma/(2*np.sqrt(T-t))-r*np.exp(-r*(T-t))*K*norm.cdf(d0)
         rho=K*(T-t)*np.exp(-r*(T-t))*norm.cdf(d0)
@@ -154,8 +154,8 @@ class PutVanillaOption(VanillaOption):
         St=geometric_brownian(r,sigma,S0,t)
         d1=(1/(sigma*np.sqrt(T-t)))*np.log((St*np.exp((r-q)*(T-t)))/K)+(1/2)*sigma*np.sqrt(T-t)
         d0=d1-(sigma*np.sqrt(T-t))
-        delta=norm.cdf(d1)-1
-        gamma=norm.pdf(d1)/((St*np.exp(-q*(T-t)))*sigma*np.sqrt(T-t))
+        delta=np.exp(-q*(T-t))*norm.cdf(d1)-1
+        gamma=(np.exp(-q*(T-t))*norm.pdf(d1))/((St*np.exp(-q*(T-t)))*sigma*np.sqrt(T-t))
         vega=(St*np.exp(-q*(T-t)))*np.sqrt(T-t)*norm.pdf(d1)
         theta=(St*np.exp(-q*(T-t)))*norm.pdf(d1)*sigma/(2*np.sqrt(T-t))+r*np.exp(-r*(T-t))*K*norm.cdf(-d0)
         rho=-K*(T-t)*np.exp(-r*(T-t))*norm.cdf(-d0)
