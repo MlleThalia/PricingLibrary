@@ -116,7 +116,7 @@ class CallVanillaOption(VanillaOption):
                         somme+=payoff[i,j]*(q**j)*((1-q)**(i-j))
                 price[i]=somme
         
-        return payoff
+        return payoff, price
 
     @classmethod
     def binomial_delta(cls, n, u, d, r, S0, K):
@@ -185,7 +185,7 @@ class PutVanillaOption(VanillaOption):
                         somme+=payoff[i,j]*(q**j)*((1-q)**(i-j))
                 price[i]=somme
             
-            return payoff
+            return payoff, price
 
     @classmethod
     def binomial_delta(cls, n, u, d, r, S0, K):
